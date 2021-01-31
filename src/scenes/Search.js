@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default function Profile() {
+export default function Search() {
   return (
     <View style={styles.container}>
-      <Text>Open up Profile!</Text>
+      <Text>Open up Search!</Text>
     </View>
   );
 }

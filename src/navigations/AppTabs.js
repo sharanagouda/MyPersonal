@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Icon} from 'react-native-elements';
-import Home from '../screens/Home';
-import Profile from '../screens/Profile';
+import Home from '../scenes/Home';
+import Profile from '../scenes/Profile';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
 const Tab = createMaterialBottomTabNavigator();
