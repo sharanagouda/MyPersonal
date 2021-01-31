@@ -15,7 +15,7 @@ export default function Profile({navigation, route}) {
   const data1 = useSelector((state) => state.appReducer);
   const data2 = useSelector((state) => state.booksReducer);
   const {bookmarks} = useSelector((state) => state.booksReducer);
-  console.log("Store", bookmarks)
+  console.log('Store', bookmarks);
   const dispatch = useDispatch();
 
   const removeFromBookmarkList = (book) => dispatch(removeBookmark(book));
@@ -49,7 +49,12 @@ export default function Profile({navigation, route}) {
                 marginTop: 10,
                 alignItems: 'center',
               }}>
-              <Icon name="like1" color={'lightblue'} size={20} type="antdesign" />
+              <Icon
+                name="like1"
+                color={'lightblue'}
+                size={20}
+                type="antdesign"
+              />
               <Text style={{fontSize: 14, paddingLeft: 10, color: '#64676D'}}>
                 {item.num_pages}
               </Text>
@@ -88,8 +93,9 @@ export default function Profile({navigation, route}) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, }}>
-      <View style={{flex: 1, paddingHorizontal: 16,backgroundColor: '#1E1B26'}}>
+    <SafeAreaView style={{flex: 1}}>
+      <View
+        style={{flex: 1, paddingHorizontal: 16, backgroundColor: '#1E1B26'}}>
         <Text style={{color: 'white', fontSize: 22}}>Bookmarks</Text>
         <View style={{flex: 1, marginTop: 8}}>
           {bookmarks.length === 0 ? (

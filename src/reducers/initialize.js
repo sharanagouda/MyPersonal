@@ -1,6 +1,7 @@
 export default {
   books: [],
   bookmarks: [],
+  selectedBookDetails: {},
   loggedIn: true,
   home: {
     sections: {
