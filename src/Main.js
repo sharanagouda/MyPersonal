@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {StoreProvider} from './reducers/index';
+// import {StoreProvider} from './reducers/index';
 import AppStack from './navigations/AppStack';
 import {NavigationContainer} from '@react-navigation/native';
 import OnBoardingStack from './navigations/onboardStack';
 import SplashScreen from 'react-native-splash-screen';
 import {userHasOnboarded} from './utils';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+
+import {store, persistor} from './config/store';
 
 /* add these in info.plist
 	<key>UIAppFonts</key>
@@ -64,13 +68,16 @@ export default class Main extends Component {
 
   render() {
     const {userOnboarded, showForceUpgradeAlert} = this.state;
+    console.log('storeretun', this.state);
     return (
       <SafeAreaProvider>
-        <StoreProvider>
-          <NavigationContainer fallback={<Text>Loading...</Text>}>
-            {userOnboarded ? <OnBoardingStack /> : <AppStack />}
-          </NavigationContainer>
-        </StoreProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer fallback={<Text>Loading...</Text>}>
+              {!userOnboarded ? <OnBoardingStack /> : <AppStack />}
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
       </SafeAreaProvider>
     );
   }

@@ -1,16 +1,26 @@
-export default (state, action) => {
+import {
+  GET_BOOKS,
+  ADD_TO_BOOKMARK_LIST,
+  REMOVE_FROM_BOOKMARK_LIST,
+} from '../actions';
+import initialState from './initialize';
+
+function booksReducer(state = initialState, action) {
   switch (action.type) {
-    case 'LOGIN':
+    case GET_BOOKS:
+      return {...state, books: action.payload};
+    case ADD_TO_BOOKMARK_LIST:
+      return {...state, bookmarks: [...state.bookmarks, action.payload]};
+    case REMOVE_FROM_BOOKMARK_LIST:
       return {
         ...state,
-        loggedIn: true,
-      };
-    case 'LOGOUT':
-      return {
-        ...state,
-        loggedIn: false,
+        bookmarks: state.bookmarks.filter(
+          (book) => book.id !== action.payload.id,
+        ),
       };
     default:
       return state;
   }
-};
+}
+
+export default booksReducer;
