@@ -1,10 +1,9 @@
-
 export default {
-    loggedIn: true,
-    home: {
-      sections: {
-        loading: true,
-        data: [],
-      },
-    }
-}
+  loggedIn: true,
+  home: {
+    sections: {
+      loading: true,
+      data: [],
+    },
+  },
+};
