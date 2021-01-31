@@ -70,15 +70,17 @@ export default class Main extends Component {
     const {userOnboarded, showForceUpgradeAlert} = this.state;
     console.log('storeretun', this.state);
     return (
-      <SafeAreaProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <NavigationContainer fallback={<Text>Loading...</Text>}>
-              {!userOnboarded ? <OnBoardingStack /> : <AppStack />}
-            </NavigationContainer>
-          </PersistGate>
-        </Provider>
-      </SafeAreaProvider>
+      <View style={styles.container}>
+        <SafeAreaProvider>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <NavigationContainer fallback={<Text>Loading...</Text>}>
+                {!userOnboarded ? <OnBoardingStack /> : <AppStack />}
+              </NavigationContainer>
+            </PersistGate>
+          </Provider>
+        </SafeAreaProvider>
+      </View>
     );
   }
 }
@@ -87,7 +89,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

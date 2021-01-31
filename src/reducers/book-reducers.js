@@ -2,7 +2,7 @@ import {
   GET_BOOKS,
   ADD_TO_BOOKMARK_LIST,
   REMOVE_FROM_BOOKMARK_LIST,
-} from '../actions';
+} from '../actions/action-types';
 import initialState from './initialize';
 
 function booksReducer(state = initialState, action) {

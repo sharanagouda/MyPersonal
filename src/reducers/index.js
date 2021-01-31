@@ -1,11 +1,3 @@
-import {combineReducers} from 'redux';
-
-import app from './app-reducers';
-
-export default combineReducers({
-  app,
-});
-
 //----------------------------------------------------------------------
 // import React, {useReducer} from 'react';
 // import initialState from './initialize';
