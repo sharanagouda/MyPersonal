@@ -54,10 +54,16 @@ const userHasOnboarded = async () => {
     return false;
   }
 };
+const colors = {
+  PRIMARY_COLOR: '#ff304f',
+  SECONDARY_COLOR: '#002651',
+  BORDER_COLOR: '#dbdbdb',
+};
 
 export {
   storeFirstLaunchData,
   storeOnboardData,
   checkIfFirstLaunch,
   userHasOnboarded,
+  colors,
 };

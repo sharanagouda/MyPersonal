@@ -4,6 +4,7 @@ import AppTabs from './AppTabs';
 import Search from '../scenes/Search';
 import {Icon} from 'react-native-elements';
 import Calculator from '../scenes/Calculator';
+import Wether from '../scenes/Wether';
 
 const AppStackNavigator = createStackNavigator();
 
@@ -22,6 +23,13 @@ export default function AppStack() {
       <AppStackNavigator.Screen
         name="Home"
         component={AppTabs}
+        options={({route}) => ({
+          headerShown: false,
+        })}
+      />
+      <AppStackNavigator.Screen
+        name="Wether"
+        component={Wether}
         options={({route}) => ({
           headerShown: false,
         })}

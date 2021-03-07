@@ -13,7 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 const menuData = [
   {
     id: 1,
-    title: 'You',
+    title: 'Calculator',
     color: '#FF4500',
     image: 'https://img.icons8.com/color/70/000000/name.png',
     page: 'calculator',
@@ -23,7 +23,7 @@ const menuData = [
     title: 'Home',
     color: '#87CEEB',
     image: 'https://img.icons8.com/office/70/000000/home-page.png',
-    page: 'calculator',
+    page: 'Wether',
   },
   {
     id: 3,
@@ -91,7 +91,7 @@ export default function BooksList() {
   };
 
   const renderItem = ({item}) => {
-    console.log('item', item);
+    // console.log('item', item);
     return (
       <TouchableOpacity
         onPress={() => {
