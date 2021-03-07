@@ -17,7 +17,9 @@ function MyTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({color}) => <Icon name="home" color={'yellow'} size={26} />,
+          tabBarIcon: ({color}) => (
+            <Icon name="home" color={'yellow'} size={26} />
+          ),
         }}
       />
       {/* <Tab.Screen

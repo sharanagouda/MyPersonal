@@ -6,148 +6,107 @@ import {
   TouchableOpacity,
   Image,
   SafeAreaView,
+  StyleSheet,
 } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
-import {Icon} from 'react-native-elements';
-import {SearchBar} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
-import {getBooks, addBookmark, removeBookmark} from '../actions';
+
+const menuData = [
+  {
+    id: 1,
+    title: 'You',
+    color: '#FF4500',
+    image: 'https://img.icons8.com/color/70/000000/name.png',
+    page: 'calculator',
+  },
+  {
+    id: 2,
+    title: 'Home',
+    color: '#87CEEB',
+    image: 'https://img.icons8.com/office/70/000000/home-page.png',
+    page: 'calculator',
+  },
+  {
+    id: 3,
+    title: 'Love',
+    color: '#4682B4',
+    image: 'https://img.icons8.com/color/70/000000/two-hearts.png',
+    page: 'calculator',
+  },
+  {
+    id: 4,
+    title: 'Family',
+    color: '#6A5ACD',
+    image: 'https://img.icons8.com/color/70/000000/family.png',
+    page: 'calculator',
+  },
+  {
+    id: 5,
+    title: 'Friends',
+    color: '#FF69B4',
+    image: 'https://img.icons8.com/color/70/000000/groups.png',
+    page: 'calculator',
+  },
+  {
+    id: 6,
+    title: 'School',
+    color: '#00BFFF',
+    image: 'https://img.icons8.com/color/70/000000/classroom.png',
+    page: 'calculator',
+  },
+  {
+    id: 7,
+    title: 'Things',
+    color: '#00FFFF',
+    image: 'https://img.icons8.com/dusk/70/000000/checklist.png',
+    page: 'calculator',
+  },
+  {
+    id: 8,
+    title: 'World',
+    color: '#20B2AA',
+    image: 'https://img.icons8.com/dusk/70/000000/globe-earth.png',
+    page: 'calculator',
+  },
+  {
+    id: 9,
+    title: 'Remember',
+    color: '#191970',
+    image: 'https://img.icons8.com/color/70/000000/to-do.png',
+    page: 'calculator',
+  },
+  {
+    id: 10,
+    title: 'Game',
+    color: '#008080',
+    image: 'https://img.icons8.com/color/70/000000/basketball.png',
+    page: 'calculator',
+  },
+];
 
 export default function BooksList() {
-  const {books, bookmarks} = useSelector((state) => state.booksReducer);
-  console.log('Books', books);
-  const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const fetchBooks = () => dispatch(getBooks());
-  const addToBookmarkList = (book) => dispatch(addBookmark(book));
-  const removeFromBookmarkList = (book) => dispatch(removeBookmark(book));
-  const [search, setSearch] = useState('');
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [masterDataSource, setMasterDataSource] = useState([]);
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
-  useEffect(() => {
-    setFilteredDataSource(books);
-    setMasterDataSource(books);
-  }, [books]);
-
-  const handleAddBookmark = (book) => {
-    addToBookmarkList(book);
-  };
-
-  const handleRemoveBookmark = (book) => {
-    removeFromBookmarkList(book);
-  };
-
   const handleSelectedBookDetails = (item) => {
-    navigation.navigate('Search', {bookId: item.id});
-  };
-
-  const searchFilterFunction = (text) => {
-    // Check if searched text is not blank
-    if (text) {
-      // Inserted text is not blank
-      // Filter the masterDataSource
-      // Update FilteredDataSource
-      const newData = masterDataSource.filter(function (item) {
-        const itemData = item.title
-          ? item.title.toUpperCase()
-          : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredDataSource(newData);
-      setSearch(text);
-    } else {
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
-      setFilteredDataSource(masterDataSource);
-      setSearch(text);
-    }
-  };
-
-  const ifExists = (book) => {
-    if (bookmarks.filter((item) => item.id === book.id).length > 0) {
-      return true;
-    }
-
-    return false;
+    navigation.navigate(`${item.page}`);
   };
 
   const renderItem = ({item}) => {
+    console.log('item', item);
     return (
       <TouchableOpacity
         onPress={() => {
           handleSelectedBookDetails(item);
         }}>
-        <View style={{marginVertical: 12}}>
-          <View style={{flexDirection: 'row', flex: 1}}>
-            {/* Book Cover */}
-            <Image
-              source={{uri: item.image_url}}
-              resizeMode="cover"
-              style={{width: 100, height: 150, borderRadius: 10}}
-            />
-            {/* Book Metadata */}
-            <View style={{flex: 1, marginLeft: 12}}>
-              {/* Book Title */}
-              <View>
-                <Text style={{fontSize: 22, paddingRight: 16, color: 'white'}}>
-                  {item.title}
-                </Text>
-              </View>
-              {/* Meta info */}
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: 10,
-                  alignItems: 'center',
-                }}>
-                <Icon
-                  name="like1"
-                  color={'lightblue'}
-                  size={20}
-                  type="antdesign"
-                />
-                <Text style={{fontSize: 14, paddingLeft: 10, color: '#64676D'}}>
-                  {item.num_pages}
-                </Text>
-                <Icon
-                  name="star"
-                  color={'yellow'}
-                  size={20}
-                  style={{paddingLeft: 16}}
-                />
-                <Text style={{fontSize: 14, paddingLeft: 10, color: '#64676D'}}>
-                  {item.rating}
-                </Text>
-              </View>
-              {/* Buttons */}
-              <View style={{marginTop: 14}}>
-                <TouchableOpacity
-                  onPress={() =>
-                    ifExists(item)
-                      ? handleRemoveBookmark(item)
-                      : handleAddBookmark(item)
-                  }
-                  activeOpacity={0.7}
-                  style={{
-                    flexDirection: 'row',
-                    padding: 2,
-                    backgroundColor: ifExists(item) ? '#F96D41' : '#2D3038',
-                    borderRadius: 20,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: 40,
-                    width: 40,
-                  }}>
-                  <Icon name="bookmark" color={'white'} size={24} style={{}} />
-                </TouchableOpacity>
-              </View>
+        <View>
+          <View style={[styles.card, {backgroundColor: item.color}]}>
+            <Image style={styles.cardImage} source={{uri: item.image}} />
+          </View>
+
+          <View style={styles.cardHeader}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={[styles.title, {color: item.color}]}>
+                {item.title}
+              </Text>
             </View>
           </View>
         </View>
@@ -156,27 +115,87 @@ export default function BooksList() {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <SearchBar
-        round
-        searchIcon={{size: 24}}
-        onChangeText={(text) => searchFilterFunction(text)}
-        onClear={(text) => searchFilterFunction('')}
-        placeholder="Type Here..."
-        value={search}
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        style={styles.list}
+        contentContainerStyle={styles.listContainer}
+        data={menuData}
+        horizontal={false}
+        numColumns={2}
+        keyExtractor={(item) => {
+          return item.id;
+        }}
+        renderItem={({item}) => renderItem({item})}
       />
-      <View
-        style={{flex: 1, paddingHorizontal: 16, backgroundColor: '#1E1B26'}}>
-        <Text style={{color: 'white', fontSize: 22}}>Bestsellers</Text>
-        <View style={{flex: 1, marginTop: 8}}>
-          <FlatList
-            data={filteredDataSource}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={renderItem}
-            showsVerticalScrollIndicator={false}
-          />
-        </View>
-      </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 40,
+    backgroundColor: '#fff',
+  },
+  list: {
+    paddingHorizontal: 5,
+    backgroundColor: '#fff',
+  },
+  listContainer: {
+    alignItems: 'center',
+  },
+  /******** card **************/
+  card: {
+    shadowColor: '#474747',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.37,
+    shadowRadius: 7.49,
+
+    elevation: 12,
+    marginVertical: 20,
+    marginHorizontal: 40,
+    backgroundColor: '#e2e2e2',
+    //flexBasis: '42%',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardHeader: {
+    paddingVertical: 17,
+    paddingHorizontal: 16,
+    borderTopLeftRadius: 1,
+    borderTopRightRadius: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  cardContent: {
+    paddingVertical: 12.5,
+    paddingHorizontal: 16,
+  },
+  cardFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 12.5,
+    paddingBottom: 25,
+    paddingHorizontal: 16,
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
+  },
+  cardImage: {
+    height: 50,
+    width: 50,
+    alignSelf: 'center',
+  },
+  title: {
+    fontSize: 24,
+    flex: 1,
+    alignSelf: 'center',
+    fontWeight: 'bold',
+  },
+});

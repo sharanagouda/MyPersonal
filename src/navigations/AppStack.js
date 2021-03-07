@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import AppTabs from './AppTabs';
 import Search from '../scenes/Search';
 import {Icon} from 'react-native-elements';
+import Calculator from '../scenes/Calculator';
 
 const AppStackNavigator = createStackNavigator();
 
@@ -24,6 +25,14 @@ export default function AppStack() {
         options={({route}) => ({
           headerShown: false,
         })}
+      />
+      <AppStackNavigator.Screen
+        options={() => ({
+          headerShown: false,
+        })}
+        name="calculator"
+        component={Calculator}
+        initialParams={{contentType: 'movie', name: ''}}
       />
       <AppStackNavigator.Screen
         options={() => ({

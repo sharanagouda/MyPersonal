@@ -20,13 +20,13 @@ export default function Search({route}) {
     getBookDetails(bookId);
   }, [bookId]);
 
-  const getBookDetails = (bookId) => {
-    getSelectedBookDetailFromList(bookId);
+  const getBookDetails = (bookdata) => {
+    getSelectedBookDetailFromList(bookdata);
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Toolbar onPressNavigateBack={()=> navigation.goBack(null)}/>
+      <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
       <View style={styles.container}>
         <Text>{selectedBookDetails.id}</Text>
         <Text>{selectedBookDetails.title}</Text>
