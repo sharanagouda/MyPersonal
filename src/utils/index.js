@@ -5,7 +5,10 @@ import React, {
   useRef,
   useContext,
 } from 'react';
-
+// Export all
+import * as Typography from '../theme/typography';
+import * as Scale from './scale';
+import * as helper from './helper';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const HAS_LAUNCHED_STORAGE_KEY = 'HAS_LAUNCHED';
@@ -61,6 +64,9 @@ const colors = {
 };
 
 export {
+  Scale,
+  Typography,
+  helper,
   storeFirstLaunchData,
   storeOnboardData,
   checkIfFirstLaunch,
