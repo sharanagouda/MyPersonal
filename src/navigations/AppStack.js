@@ -5,6 +5,7 @@ import Search from '../scenes/Search';
 import {Icon} from 'react-native-elements';
 import Calculator from '../scenes/Calculator';
 import Wether from '../scenes/Wether';
+import CashCounter from '../scenes/CashCounter';
 
 const AppStackNavigator = createStackNavigator();
 
@@ -40,6 +41,14 @@ export default function AppStack() {
         })}
         name="calculator"
         component={Calculator}
+        initialParams={{contentType: 'movie', name: ''}}
+      />
+            <AppStackNavigator.Screen
+        options={() => ({
+          headerShown: false,
+        })}
+        name="CashCounter"
+        component={CashCounter}
         initialParams={{contentType: 'movie', name: ''}}
       />
       <AppStackNavigator.Screen

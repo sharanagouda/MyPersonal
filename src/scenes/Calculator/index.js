@@ -17,7 +17,7 @@ export default function Calculator() {
     <SafeAreaView style={styles.container}>
       <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
       <View>
-        <Text>skdjf</Text>
+        <Text>Calculator</Text>
       </View>
     </SafeAreaView>
   );
