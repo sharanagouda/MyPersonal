@@ -23,7 +23,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
-    "react-native-elements": "^3.1.0",
+    "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "1.8.0",
     "react-native-inappbrowser-reborn": "^3.5.1",
     "react-native-paper": "^4.7.2",

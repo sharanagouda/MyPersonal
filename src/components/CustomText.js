@@ -41,7 +41,8 @@ const CustomText = (props) => {
   }
   return (
     <Text
-      style={[textFamily, style]}
+      // style={[textFamily, style]}
+      style={[style]}
       numberOfLines={numberOfLines}
       onTextLayout={onTextLayout}>
       {text}

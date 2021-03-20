@@ -1,3 +1,9 @@
+// const regular = require('./assets/fonts/Montserrat-Regular.ttf');
+// const light = require('./assets/fonts/Montserrat-Light.ttf');
+// const medium = require('./assets/fonts/Montserrat-Medium.ttf');
+// const bold = require('./assets/fonts/Montserrat-Bold.ttf');
+// const semiBold = require('./assets/fonts/Montserrat-SemiBold.ttf');
+// const extraBold = require('./assets/fonts/Montserrat-ExtraBold.ttf');
 // Fonts types and sizes
 export const FONT_FAMILY_REGULAR = 'Montserrat-Regular';
 export const FONT_FAMILY_LIGHT = 'Montserrat-Light';
