@@ -20,7 +20,8 @@ const CashCounter=()=>{
         <SafeAreaView style={styles.container}>
           <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
           <View>
-            <Text>CashCounter</Text>
+            <Text>Cash Counter</Text>
+            <Text>Cash Counter</Text>
           </View>
         </SafeAreaView>
       );
