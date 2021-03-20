@@ -27,10 +27,10 @@ const menuData = [
   },
   {
     id: 3,
-    title: 'Love',
+    title: 'Cash Counter',
     color: '#4682B4',
     image: 'https://img.icons8.com/color/70/000000/two-hearts.png',
-    page: 'calculator',
+    page: 'CashCounter',
   },
   {
     id: 4,

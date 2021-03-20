@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet} from 'react-native';
-import constant from 'theme/constants';
+import constant from '../theme/constants';
 import PropTypes from 'prop-types';
 import * as utils from '../utils';
 import {color} from '../theme';
