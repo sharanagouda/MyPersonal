@@ -1,3 +1,3 @@
-import { LocalizationContext } from 'services/Localize'
+import {LocalizationContext} from '../services/Localize';
 
 export default LocalizationContext;

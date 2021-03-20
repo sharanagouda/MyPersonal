@@ -1,5 +1,4 @@
-import colors from 'colors';
-import { moderateScale } from 'utils/scale';
+import {moderateScale} from '../utils/scale';
 import layout from './layout';
 
 const CONSTANT = {
@@ -15,10 +14,10 @@ const CONSTANT = {
   BUTTON_WIDTH_SM: layout.SCREEN_WIDTH / 2.24,
 
   // Square Button Config
-  BUTTON_BG: colors.primaryColor,
-  BUTTON_SELECT_BG: colors.primaryColorLight,
-  BUTTON_FG: colors.secondaryColor,
-  BUTTON_SELECT_FG: colors.secondaryColorLight,
+  BUTTON_BG: '#FFF',
+  BUTTON_SELECT_BG: '#FFD',
+  BUTTON_FG: 'FFA',
+  BUTTON_SELECT_FG: '#FFC',
   FONT_TYPE_SEMI_BOLD: 'semiBold',
   FONT_TYPE_REGULAR: 'regular',
   FONT_TYPE_BOLD: 'bold',

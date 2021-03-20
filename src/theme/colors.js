@@ -59,7 +59,7 @@ const Colors = {
   mediumDarkPurple: '#2D1B4B',
   darkPink: '#FF4376',
   SearchFilterSelectedBg: '#9c598b',
-  SearchFilterInActivedBg: '#12043606'
+  SearchFilterInActivedBg: '#12043606',
 };
 
 export default Colors;

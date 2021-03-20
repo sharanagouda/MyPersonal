@@ -11,6 +11,9 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import checkIfUpdateNeeded from './utils/needUpdate';
 import VersionCheck from 'react-native-version-check';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+// import * as Font from 'expo-font';
 
 import {store, persistor} from './config/store';
 
@@ -32,6 +35,14 @@ import {store, persistor} from './config/store';
  <string>SimpleLineIcons.ttf</string>
  <string>Octicons.ttf</string>
  <string>Zocial.ttf</string>
+ 		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Light.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
+		<string>Montserrat-Black.ttf</string>
+		<string>Fontisto.ttf</string>
 </array>
 */
 
@@ -112,6 +123,8 @@ export default class Main extends Component {
    * Method that serves to load resources and make API calls
    */
   prepareResources = async () => {
+    // await this.loadFonts();
+    Icon.loadFont();
     SplashScreen.hide();
     userHasOnboarded().then((value) => {
       this.setState({
@@ -120,6 +133,18 @@ export default class Main extends Component {
       });
     });
   };
+
+  // loadFonts = async () => {
+  //   await Font.loadAsync({
+  //     // This'll be used in font-family
+  //     'Montserrat-Regular': regular,
+  //     'Montserrat-Light': light,
+  //     'Montserrat-Medium': medium,
+  //     'Montserrat-Bold': bold,
+  //     'Montserrat-SemiBold': semiBold,
+  //     'Montserrat-ExtraBold': extraBold,
+  //   });
+  // };
 
   render() {
     const {userOnboarded, showForceUpgradeAlert} = this.state;
