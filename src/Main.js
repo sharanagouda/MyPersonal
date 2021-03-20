@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Platform} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 // import {StoreProvider} from './reducers/index';
 import AppStack from './navigations/AppStack';
@@ -9,6 +9,8 @@ import SplashScreen from 'react-native-splash-screen';
 import {userHasOnboarded} from './utils';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+import checkIfUpdateNeeded from './utils/needUpdate';
+import VersionCheck from 'react-native-version-check';
 
 import {store, persistor} from './config/store';
 
@@ -40,6 +42,9 @@ export default class Main extends Component {
       appIsReady: false,
       userOnboarded: false,
       showForceUpgradeAlert: false,
+      updateMessage:
+        'This version of the app is not supported. Please update App to continue using it.',
+      forceUpgradeDeviceData: [],
     };
   }
   async componentDidMount() {
@@ -50,9 +55,59 @@ export default class Main extends Component {
     } catch (e) {
       // console.warn(e);
     }
+    this.checkUpdateNeeded(Platform.OS);
     this.prepareResources();
   }
 
+  checkUpdateNeeded = async (platform) => {
+    const latestVersion = await VersionCheck.getLatestVersion();
+    const currentVersion = VersionCheck.getCurrentVersion();
+    //  console.log('currentVersion of APP', currentVersion)
+    if (checkIfUpdateNeeded(currentVersion, latestVersion)) {
+      this.setState({
+        showForceUpgradeAlert: true,
+        updateMessage: this.state.updateMessage,
+      });
+    }
+    // axios.get(`${Config.APP_API_URL}v3/mobile/version?platform=${platform}`, {
+    //   headers
+    // })
+    //   .then((response) => {
+    //     const { result } = response.data
+    //     if (result && !helper.isEmptyArray(result)) {
+    //       this.setState({
+    //         forceUpgradeDeviceData: result
+    //       })
+    //       const { forceUpgradeDeviceData } = this.state
+    //       if (forceUpgradeDeviceData && !helper.isEmptyArray(forceUpgradeDeviceData)) {
+    //         forceUpgradeDeviceData.forEach((item) => {
+    //           // Return 1  if currentVersion > item.version
+    //           // Return -1 if currentVersion < item.version
+    //           // Return 0  if currentVersion == item.version
+    //           //  console.log('items for upgrade', item)
+    //           if (item.version && checkIfUpdateNeeded(currentVersion, item.version) === 0
+    //            && item.type === FORCE_UPGRADE_TYPES.SPECIFIC_VERSIOM) {
+    //             this.setState({
+    //               showForceUpgradeAlert: true,
+    //               updateMessage: item.message
+    //             })
+    //           }
+    //           //  console.log('compare versions', this.compareVersions(currentVersion, item.version))
+    //           if (item.version && checkIfUpdateNeeded(currentVersion, item.version) === -1
+    //            && item.type === FORCE_UPGRADE_TYPES.MINIMUN_VERSION) {
+    //             this.setState({
+    //               showForceUpgradeAlert: true,
+    //               updateMessage: item.message
+    //             })
+    //           }
+    //         })
+    //       }
+    //     }
+    //   })
+    //   .catch(() => {
+    //     // console.log('error force upgrade', error)
+    //   })
+  };
   /**
    * Method that serves to load resources and make API calls
    */

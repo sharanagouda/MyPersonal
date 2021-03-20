@@ -37,7 +37,7 @@ class Toolbar extends Component {
    * React render method for rendering the native elements
    */
   render() {
-    console.log(this.props.notifications);
+    // console.log('notifications', this.props.notifications);
     return (
       <View style={[styles.toolbarContainer, this.props.toolbarContainer]}>
         <View style={styles.backArrowContainer}>
