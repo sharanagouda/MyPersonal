@@ -1,5 +1,5 @@
-import {EVENT_TYPE, CONTENT_PUBLISHERS_CODE} from 'utils/constants';
-import Images from 'utils/images';
+import {EVENT_TYPE, CONTENT_PUBLISHERS_CODE} from './constants';
+// import Images from 'utils/images';
 import moment from 'moment';
 
 const monthNames = [
@@ -315,26 +315,26 @@ const decodeHTMLEntities = (textInuput) =>
     (match, entity) => entities[entity] || match,
   );
 
-const publisherLogo = (name) => {
-  let imageURL = '';
-  switch (name) {
-    case CONTENT_PUBLISHERS_CODE.HINDUSTAN_TIMES:
-      imageURL = Images.HindustanTimes;
-      return imageURL;
-    case CONTENT_PUBLISHERS_CODE.DESI_MARTINI:
-      imageURL = Images.Desimartini;
-      return imageURL;
-    case CONTENT_PUBLISHERS_CODE.LIVE_MINT:
-      imageURL = Images.Livemint;
-      return imageURL;
-    case CONTENT_PUBLISHERS_CODE.FILM_COMPANION:
-      imageURL = Images.FilmCompanion;
-      return imageURL;
-    default:
-      imageURL = 'http://';
-      return imageURL;
-  }
-};
+// const publisherLogo = (name) => {
+//   let imageURL = '';
+//   switch (name) {
+//     case CONTENT_PUBLISHERS_CODE.HINDUSTAN_TIMES:
+//       imageURL = Images.HindustanTimes;
+//       return imageURL;
+//     case CONTENT_PUBLISHERS_CODE.DESI_MARTINI:
+//       imageURL = Images.Desimartini;
+//       return imageURL;
+//     case CONTENT_PUBLISHERS_CODE.LIVE_MINT:
+//       imageURL = Images.Livemint;
+//       return imageURL;
+//     case CONTENT_PUBLISHERS_CODE.FILM_COMPANION:
+//       imageURL = Images.FilmCompanion;
+//       return imageURL;
+//     default:
+//       imageURL = 'http://';
+//       return imageURL;
+//   }
+// };
 export default {
   formatDate,
   formatDateDDMMYY,
@@ -352,5 +352,5 @@ export default {
   formatTimeAgo,
   decodeHTMLEntities,
   formatDateAndTime,
-  publisherLogo,
+  // publisherLogo,
 };
