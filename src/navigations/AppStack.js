@@ -43,7 +43,7 @@ export default function AppStack() {
         component={Calculator}
         initialParams={{contentType: 'movie', name: ''}}
       />
-            <AppStackNavigator.Screen
+      <AppStackNavigator.Screen
         options={() => ({
           headerShown: false,
         })}
