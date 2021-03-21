@@ -73,7 +73,7 @@ const CashPreview = ({route}) => {
       <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
       <View style={styles.mainView}>
         <CustomText
-          text="Payee Name: "
+          text={`Payee Name: ${payeeName}`}
           style={{color: '#000', fontSize: 18, fontWeight: '600'}}
         />
         <CustomText
