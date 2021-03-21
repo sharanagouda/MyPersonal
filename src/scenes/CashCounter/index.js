@@ -38,6 +38,22 @@ const CashCounter = () => {
   const [totalAmount, setTotalAmount] = useState();
   const [totalCount, setTotalCount] = useState();
   const date = new Date();
+  const cashCounterDetails = {
+    payeeName,
+    TwoThousands,
+    OneThousands,
+    FiveHundread,
+    TwoHundread,
+    OneHundread,
+    FiftyRupees,
+    TwentyRupees,
+    TenRupees,
+    FiveRupees,
+    TwoRupees,
+    OneRupees,
+    totalAmount,
+    totalCount,
+  };
 
   useEffect(() => {
     const totalValue =
@@ -82,24 +98,51 @@ const CashCounter = () => {
   ]);
 
   const total = () => {
-    var formatter = new Intl.NumberFormat(
-      'en-IN',
-      // {
-      //   minimumFractionDigits: 2,
-      // }
-    );
-    return formatter.format(totalAmount);
+    let formatter;
+    if (Platform.OS == 'ios') {
+      formatter = new Intl.NumberFormat(
+        'en-IN',
+        // {
+        //   minimumFractionDigits: 2,
+        // }
+      ).format(totalAmount);
+    } else {
+      require('intl'); // import intl object
+      require('intl/locale-data/jsonp/en-IN');
+      require('intl/locale-data/jsonp/fr-BE');
+      require('intl/locale-data/jsonp/nl-BE');
+      require('intl/locale-data/jsonp/it-IT');
+      formatter = new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+      }).format(totalAmount);
+    }
+    return formatter;
   };
 
   const multiFlyFunction = (data, multiValue) => {
     const totalValue = data * multiValue;
-    var formatter = new Intl.NumberFormat(
-      'en-IN',
-      // {
-      //   minimumFractionDigits: 2,
-      // }
-    );
-    return `${formatter.format(totalValue)}/-`;
+    let formatter;
+    if (Platform.OS == 'ios') {
+      formatter = new Intl.NumberFormat(
+        'en-IN',
+        // {
+        //   minimumFractionDigits: 2,
+        // }
+      ).format(totalValue);
+    } else {
+      require('intl'); // import intl object
+      require('intl/locale-data/jsonp/en-IN');
+      require('intl/locale-data/jsonp/fr-BE');
+      require('intl/locale-data/jsonp/nl-BE');
+      require('intl/locale-data/jsonp/it-IT');
+      formatter = new Intl.NumberFormat('en-IN', {
+        // style: 'currency',
+        currency: 'INR',
+      }).format(totalValue);
+    }
+
+    return `${formatter}/-`;
   };
 
   const totalNumberOfCount = () => {
@@ -195,9 +238,15 @@ const CashCounter = () => {
             </Pressable>
           </View>
           <View style={styles.headingView}>
-            <CustomText text="Currency " />
-            <CustomText text="Value" />
-            <CustomText text="Amount" />
+            <View style={styles.ammountView}>
+              <CustomText text="Currency " />
+            </View>
+            <View style={styles.numberCountView}>
+              <CustomText text="Value" />
+            </View>
+            <View style={styles.totalView}>
+              <CustomText text="Amount" />
+            </View>
           </View>
           <View style={styles.mainView}>
             <View style={styles.ammountView}>
@@ -564,6 +613,21 @@ const CashCounter = () => {
               <Text style={{fontWeight: '600'}}>Share</Text>
             </Pressable>
             <Pressable
+              onPress={() => {
+                totalAmount &&
+                  navigation.navigate('CashPreview', {
+                    cashCounterDetails,
+                  });
+              }}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+                },
+                styles.wrapperCustom,
+              ]}>
+              <Text style={{fontWeight: '600'}}>Preview</Text>
+            </Pressable>
+            <Pressable
               onPress={() => clearAllDatas()}
               style={({pressed}) => [
                 {
@@ -574,11 +638,6 @@ const CashCounter = () => {
               <Text style={{fontWeight: '600'}}>Clear All</Text>
             </Pressable>
           </View>
-          <TouchableOpacity
-            style={styles.submitButton}
-            onPress={() => total(TwoThousands, FiveHundread)}>
-            <Text style={styles.submitButtonText}> Submit </Text>
-          </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
@@ -609,13 +668,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   inputNumberText: {
-    height: 35,
+    height: 40,
     width: 100,
     borderColor: '#FFF',
     borderRadius: 5,
     borderWidth: 1,
   },
   mainView: {
+    flex: 1,
     backgroundColor: 'lightblue',
     flexDirection: 'row',
     alignItems: 'center',
@@ -642,7 +702,7 @@ const styles = StyleSheet.create({
     flex: 0.45,
   },
   totalView: {
-    flex: 0.2,
+    flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -676,12 +736,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingVertical: 5,
+    paddingHorizontal: 10,
   },
   numberToWordsView: {
     backgroundColor: '#7a42f4',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
+    padding: 10,
   },
   buttonsView: {
     backgroundColor: 'green',
