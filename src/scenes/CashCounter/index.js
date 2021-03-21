@@ -1,9 +1,9 @@
+/* eslint-disable radix */
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
   Platform,
   Pressable,
   SafeAreaView,
@@ -16,7 +16,9 @@ import Toolbar from '../../components/ToolBar';
 import CustomText from '../../components/CustomText';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import * as utils from '../../utils';
+import converter from 'number-to-words';
 import helper from '../../utils/helper';
+import onShare from '../../utils/share';
 
 const CashCounter = () => {
   const navigation = useNavigation();
@@ -33,32 +35,26 @@ const CashCounter = () => {
   const [TwoRupees, SetTwoRupees] = useState('');
   const [OneRupees, SetOneRupees] = useState('');
   const [isEditable, setEditable] = useState('');
+  const [totalAmount, setTotalAmount] = useState();
+  const [totalCount, setTotalCount] = useState();
+  const date = new Date();
 
-  const total = () => {
+  useEffect(() => {
     const totalValue =
       TwoThousands * 2000 +
       OneThousands * 1000 +
       FiveHundread * 500 +
       TwoHundread * 200 +
       OneHundread * 100 +
-      FiveRupees * 50 +
+      FiftyRupees * 50 +
       TwentyRupees * 20 +
       TenRupees * 10 +
       FiveRupees * 5 +
       TwoRupees * 2 +
       OneRupees * 1;
-    var formatter = new Intl.NumberFormat(
-      'en-IN',
-      // {
-      //   minimumFractionDigits: 2,
-      // }
-    );
-    return formatter.format(totalValue);
-  };
+    setTotalAmount(totalValue);
 
-  const totalNumberOfCount = () => {
-    //  Alert.alert(TwoThousands);
-    const notes =
+    const totalNoteCount =
       (parseInt(TwoThousands) || 0) +
       (parseInt(OneThousands) || 0) +
       (parseInt(FiveHundread) || 0) +
@@ -70,8 +66,88 @@ const CashCounter = () => {
       (parseInt(FiveRupees) || 0) +
       (parseInt(TwoRupees) || 0) +
       (parseInt(OneRupees) || 0);
+    setTotalCount(totalNoteCount);
+  }, [
+    TwoThousands,
+    OneThousands,
+    FiveHundread,
+    FiveRupees,
+    OneHundread,
+    FiftyRupees,
+    OneRupees,
+    TenRupees,
+    TwentyRupees,
+    TwoHundread,
+    TwoRupees,
+  ]);
+
+  const total = () => {
+    var formatter = new Intl.NumberFormat(
+      'en-IN',
+      // {
+      //   minimumFractionDigits: 2,
+      // }
+    );
+    return formatter.format(totalAmount);
+  };
+
+  const multiFlyFunction = (data, multiValue) => {
+    const totalValue = data * multiValue;
+    var formatter = new Intl.NumberFormat(
+      'en-IN',
+      // {
+      //   minimumFractionDigits: 2,
+      // }
+    );
+    return `${formatter.format(totalValue)}/-`;
+  };
+
+  const totalNumberOfCount = () => {
+    //  Alert.alert(TwoThousands);
+    const notes = totalCount;
 
     return notes;
+  };
+
+  const convertNumbersToWords = () => {
+    const numberToWordsResults =
+      totalAmount === 0 ? '' : `${converter.toWords(totalAmount)} only`;
+    return numberToWordsResults;
+  };
+
+  const clearAllDatas = () => {
+    setPayeeName('');
+    setTwoThousands('');
+    setOneThousands('');
+    SetFiveHundread('');
+    SetTwoHundread('');
+    SetOneHundread('');
+    SetFiftyRupees('');
+    SetTwentyRupees('');
+    SetTenRupees('');
+    SetFiveRupees('');
+    SetTwoRupees('');
+    SetOneRupees('');
+    setTotalAmount('');
+  };
+
+  const shareTheDetails = () => {
+    const message = `Date: ${helper.formatDateDDMMYY(date)}\n ${
+      TwoThousands && `2000 x ${TwoThousands} = ${TwoThousands * 2000}\n`
+    } ${OneThousands && `1000 x ${OneThousands} = ${OneThousands * 1000} \n`} ${
+      FiveHundread && `500 x ${FiveHundread} = ${FiveHundread * 500}\n`
+    } ${TwoHundread && `200 x ${TwoHundread} = ${TwoHundread * 200}\n`}${
+      OneHundread && `100 x ${OneHundread} = ${OneHundread * 100}\n`
+    }${FiftyRupees && `50 x ${FiftyRupees} = ${FiftyRupees * 50}\n`}
+    ${TwentyRupees ? `20 x ${TwentyRupees} = ${TwentyRupees * 20}` : ''}
+    ${TenRupees && `10 x ${TenRupees} = ${TenRupees * 10}\n`}${
+      FiveRupees && `5 x ${FiveRupees} = ${FiveRupees * 5}\n`
+    }${TwoRupees && `2 x ${TwoRupees} = ${TwoRupees * 2}\n`}
+    ${
+      OneRupees && `10 x ${OneRupees} = ${OneRupees * 1}\n`
+    } =================== \n Total = ${totalAmount} \n ${convertNumbersToWords()}\n [Total ${totalCount} Notes]`;
+    // Alert.alert(message);
+    onShare(message);
   };
 
   return (
@@ -147,7 +223,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${TwoThousands * 2000}/-`}
+                text={multiFlyFunction(TwoThousands, 2000)}
                 style={styles.ammountText}
               />
             </View>
@@ -176,7 +252,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${OneThousands * 1000}/-`}
+                text={multiFlyFunction(OneThousands, 1000)}
                 style={styles.ammountText}
               />
             </View>
@@ -205,7 +281,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${FiveHundread * 500}/-`}
+                text={multiFlyFunction(FiveHundread, 500)}
                 style={styles.ammountText}
               />
             </View>
@@ -234,7 +310,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${TwoHundread * 200}/-`}
+                text={multiFlyFunction(TwoHundread, 200)}
                 style={styles.ammountText}
               />
             </View>
@@ -263,7 +339,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${OneHundread * 100}/-`}
+                text={multiFlyFunction(OneHundread, 100)}
                 style={styles.ammountText}
               />
             </View>
@@ -292,7 +368,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${FiftyRupees * 50}/-`}
+                text={multiFlyFunction(FiftyRupees, 50)}
                 style={styles.ammountText}
               />
             </View>
@@ -321,7 +397,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${TwentyRupees * 20}/-`}
+                text={multiFlyFunction(TwentyRupees, 20)}
                 style={styles.ammountText}
               />
             </View>
@@ -350,7 +426,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${TenRupees * 10}/-`}
+                text={multiFlyFunction(TenRupees, 10)}
                 style={styles.ammountText}
               />
             </View>
@@ -379,7 +455,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${FiveRupees * 5}/-`}
+                text={multiFlyFunction(FiveRupees, 5)}
                 style={styles.ammountText}
               />
             </View>
@@ -408,7 +484,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${TwoRupees * 2}/-`}
+                text={multiFlyFunction(TwoRupees, 2)}
                 style={styles.ammountText}
               />
             </View>
@@ -437,7 +513,7 @@ const CashCounter = () => {
             </View>
             <View style={styles.totalView}>
               <CustomText
-                text={`${OneRupees * 1}/-`}
+                text={multiFlyFunction(OneRupees, 1)}
                 style={styles.ammountText}
               />
             </View>
@@ -452,6 +528,51 @@ const CashCounter = () => {
             <View style={styles.totalAmmountView}>
               <CustomText text={total()} />
             </View>
+          </View>
+          {totalAmount ? (
+            <View style={styles.numberToWordsView}>
+              {/* <View style={styles.inWordsView}>
+                <CustomText text="In Words:" />
+              </View> */}
+              <CustomText
+                text={convertNumbersToWords()}
+                style={styles.numberToWords}
+              />
+            </View>
+          ) : null}
+          <View style={styles.buttonsView}>
+            <Pressable
+              onPress={() => totalAmount && setPayeeName('')}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+                },
+                styles.wrapperCustom,
+              ]}>
+              <Text style={{fontWeight: '600'}}>Save</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => {
+                totalAmount && shareTheDetails();
+              }}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+                },
+                styles.wrapperCustom,
+              ]}>
+              <Text style={{fontWeight: '600'}}>Share</Text>
+            </Pressable>
+            <Pressable
+              onPress={() => clearAllDatas()}
+              style={({pressed}) => [
+                {
+                  backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
+                },
+                styles.wrapperCustom,
+              ]}>
+              <Text style={{fontWeight: '600'}}>Clear All</Text>
+            </Pressable>
           </View>
           <TouchableOpacity
             style={styles.submitButton}
@@ -472,7 +593,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
   },
   wrapperCustom: {
-    borderRadius: 8,
+    borderRadius: 5,
     padding: 6,
   },
   payeeView: {
@@ -508,6 +629,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  inWordsView: {
+    flex: 0.4,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
   ammountText: {color: '#000', fontSize: 16},
   numberCountView: {
     flexDirection: 'row',
@@ -527,9 +653,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   totalAmmountView: {
-    flex: 0.4,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    flex: 0.3,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   totalCountView: {
     alignItems: 'center',
@@ -550,5 +676,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingVertical: 5,
+  },
+  numberToWordsView: {
+    backgroundColor: '#7a42f4',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+  },
+  buttonsView: {
+    backgroundColor: 'green',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 5,
+    borderTopWidth: 1,
+    borderTopColor: '#000',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000',
+  },
+  numberToWords: {
+    textTransform: 'capitalize',
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: '600',
   },
 });
