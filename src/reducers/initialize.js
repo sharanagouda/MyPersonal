@@ -9,4 +9,8 @@ export default {
       data: [],
     },
   },
+  cashCounter: {
+    loading: true,
+    data: [],
+  },
 };
