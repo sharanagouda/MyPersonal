@@ -191,6 +191,9 @@ PODS:
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
+  - react-native-simple-toast (1.1.3):
+    - React-Core
+    - Toast (~> 4.0.0)
   - react-native-splash-screen (3.2.0):
     - React
   - react-native-version-check (3.4.2):
@@ -277,6 +280,7 @@ PODS:
     - React-Core
   - RNVectorIcons (8.1.0):
     - React-Core
+  - Toast (4.0.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -300,6 +304,7 @@ DEPENDENCIES:
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-version-check (from `../node_modules/react-native-version-check`)
   - react-native-view-shot (from `../node_modules/react-native-view-shot`)
@@ -328,6 +333,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - Toast
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -366,6 +372,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/geolocation"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-simple-toast:
+    :path: "../node_modules/react-native-simple-toast"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
   react-native-version-check:
@@ -435,6 +443,7 @@ SPEC CHECKSUMS:
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
   react-native-geolocation: c956aeb136625c23e0dce0467664af2c437888c9
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-simple-toast: bf002828cf816775a6809f7a9ec3907509bce11f
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-version-check: d8b8900e6ce03ae1568cb22ef9451f2508188883
   react-native-view-shot: 4475fde003fe8a210053d1f98fb9e06c1d834e1c
@@ -458,6 +467,7 @@ SPEC CHECKSUMS:
   RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
   RNShare: 8af5349f05fc042d230674dd650d19789187ff9c
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: 2e14613ffc0cbb3f12610545f22b87a766256c5e

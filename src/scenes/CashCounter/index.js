@@ -7,11 +7,10 @@ import {
   Platform,
   Pressable,
   SafeAreaView,
-  Alert,
-  TouchableOpacity,
   TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector, useDispatch} from 'react-redux';
 import Toolbar from '../../components/ToolBar';
 import CustomText from '../../components/CustomText';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -19,9 +18,15 @@ import * as utils from '../../utils';
 import converter from 'number-to-words';
 import helper from '../../utils/helper';
 import onShare from '../../utils/share';
+import {addCashCounterDataToList} from '../../actions';
+import Toast from 'react-native-simple-toast';
 
 const CashCounter = () => {
+  const {cashCounter} = useSelector((state) => state.cashCounterReducer);
+  console.log('cashCounter:-----', cashCounter);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [payeeName, setPayeeName] = useState('');
   const [TwoThousands, setTwoThousands] = useState('');
   const [OneThousands, setOneThousands] = useState('');
@@ -53,7 +58,9 @@ const CashCounter = () => {
     OneRupees,
     totalAmount,
     totalCount,
+    dateOfEntry: new Date(),
   };
+  const addCashCounterData = (book) => dispatch(addCashCounterDataToList(book));
 
   useEffect(() => {
     const totalValue =
@@ -96,6 +103,11 @@ const CashCounter = () => {
     TwoHundread,
     TwoRupees,
   ]);
+
+  const handleAddBookmark = () => {
+    addCashCounterData(cashCounterDetails);
+    Toast.show('Data saved Successfully ', Toast.SHORT, ['UIAlertController']);
+  };
 
   const total = () => {
     let formatter;
@@ -591,7 +603,7 @@ const CashCounter = () => {
           ) : null}
           <View style={styles.buttonsView}>
             <Pressable
-              onPress={() => totalAmount && setPayeeName('')}
+              onPress={() => totalAmount && handleAddBookmark()}
               style={({pressed}) => [
                 {
                   backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',

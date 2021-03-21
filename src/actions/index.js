@@ -6,6 +6,7 @@ import {
   ADD_TO_BOOKMARK_LIST,
   REMOVE_FROM_BOOKMARK_LIST,
   SELECT_BOOK,
+  ADD_CASH_COUNTER_DATA_TO_LIST,
 } from '../actions/action-types';
 // Define action creators
 
@@ -62,5 +63,13 @@ export const removeBookmark = (book) => (dispatch) => {
   dispatch({
     type: REMOVE_FROM_BOOKMARK_LIST,
     payload: book,
+  });
+};
+
+export const addCashCounterDataToList = (data) => (dispatch) => {
+  console.log("sdfsdfa", data)
+  dispatch({
+    type: ADD_CASH_COUNTER_DATA_TO_LIST,
+    payload: data,
   });
 };
