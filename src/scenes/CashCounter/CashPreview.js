@@ -257,7 +257,7 @@ const CashPreview = ({route}) => {
           </View>
         ) : null}
         <CustomText
-          text={`Total Amount:${total()}`}
+          text={`Total Amount: ${total()}`}
           style={{color: '#000', fontSize: 18, fontWeight: '600'}}
         />
         <CustomText
