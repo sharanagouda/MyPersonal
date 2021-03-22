@@ -42,6 +42,7 @@ const CashCounter = () => {
   const [isEditable, setEditable] = useState('');
   const [totalAmount, setTotalAmount] = useState();
   const [totalCount, setTotalCount] = useState();
+  const [isHighlighted, setIsHighlighted] = useState(false);
   const date = new Date();
   const cashCounterDetails = {
     payeeName,
@@ -129,7 +130,7 @@ const CashCounter = () => {
         currency: 'INR',
       }).format(totalAmount);
     }
-    return formatter;
+    return `${formatter}/-`;
   };
 
   const multiFlyFunction = (data, multiValue) => {
@@ -225,7 +226,7 @@ const CashCounter = () => {
           <View style={styles.payeeView}>
             <CustomText text="Payee Name: " />
             <TextInput
-              style={styles.payeeInput}
+              style={[styles.payeeInput, isHighlighted && styles.isHighlighted]}
               underlineColorAndroid="transparent"
               placeholder=""
               placeholderTextColor="#9a73ef"
@@ -234,6 +235,10 @@ const CashCounter = () => {
               value={payeeName}
               keyboardType="default"
               selectionColor="#fff"
+              maxLength={20}
+              onFocus={() => {
+                setIsHighlighted(true);
+              }}
               onChangeText={(text) => {
                 setPayeeName(text);
               }}
@@ -276,6 +281,8 @@ const CashCounter = () => {
                 value={TwoThousands}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                textAlign={'center'}
+                maxLength={7}
                 onChangeText={(text) => {
                   setTwoThousands(text);
                 }}
@@ -305,6 +312,8 @@ const CashCounter = () => {
                 value={OneThousands}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   setOneThousands(text);
                 }}
@@ -334,6 +343,8 @@ const CashCounter = () => {
                 value={FiveHundread}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetFiveHundread(text);
                 }}
@@ -362,6 +373,8 @@ const CashCounter = () => {
                 editable={true}
                 value={TwoHundread}
                 keyboardType="phone-pad"
+                maxLength={7}
+                textAlign={'center'}
                 selectionColor="#fff"
                 onChangeText={(text) => {
                   SetTwoHundread(text);
@@ -392,6 +405,8 @@ const CashCounter = () => {
                 value={OneHundread}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetOneHundread(text);
                 }}
@@ -421,6 +436,8 @@ const CashCounter = () => {
                 value={FiftyRupees}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetFiftyRupees(text);
                 }}
@@ -450,6 +467,8 @@ const CashCounter = () => {
                 value={TwentyRupees}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetTwentyRupees(text);
                 }}
@@ -479,6 +498,8 @@ const CashCounter = () => {
                 value={TenRupees}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetTenRupees(text);
                 }}
@@ -508,6 +529,8 @@ const CashCounter = () => {
                 value={FiveRupees}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetFiveRupees(text);
                 }}
@@ -537,6 +560,8 @@ const CashCounter = () => {
                 value={TwoRupees}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetTwoRupees(text);
                 }}
@@ -566,6 +591,8 @@ const CashCounter = () => {
                 value={OneRupees}
                 keyboardType="phone-pad"
                 selectionColor="#fff"
+                maxLength={7}
+                textAlign={'center'}
                 onChangeText={(text) => {
                   SetOneRupees(text);
                 }}
@@ -678,6 +705,7 @@ const styles = StyleSheet.create({
     width: '65%',
     borderColor: '#7a42f4',
     borderWidth: 1,
+    borderRadius: 5,
   },
   inputNumberText: {
     height: 40,
@@ -725,14 +753,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   totalAmmountView: {
-    flex: 0.3,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 0.5,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingRight: 20,
   },
   totalCountView: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 0.4,
+    paddingLeft: 20,
   },
   submitButton: {
     backgroundColor: '#7a42f4',
@@ -771,5 +801,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     fontWeight: '600',
+  },
+  isHighlighted: {
+    borderColor: 'green',
+    backgroundColor: '#C0C0C0',
   },
 });
