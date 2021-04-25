@@ -1,35 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+import React from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Toolbar from '../../components/ToolBar';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import Buyer from './Buyer';
+import Wholesaler from './Wholesaler';
+import Manufacturer from './Manufacturer';
 
 const GSTCalculator = () => {
   const navigation = useNavigation();
-  function HomeScreen() {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Home!</Text>
-      </View>
-    );
-  }
-
-  function SettingsScreen() {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Settings!</Text>
-      </View>
-    );
-  }
-
   const Tab = createMaterialTopTabNavigator();
   return (
     <SafeAreaView style={styles.container}>
@@ -40,9 +19,9 @@ const GSTCalculator = () => {
           labelStyle: {fontSize: 15, textTransform: 'capitalize'},
           style: {backgroundColor: 'powderblue'},
         }}>
-        <Tab.Screen name="Buyer" component={HomeScreen} />
-        <Tab.Screen name="Manufacturer" component={SettingsScreen} />
-        <Tab.Screen name="Wholesaler/Retailer" component={SettingsScreen} />
+        <Tab.Screen name="Buyer" component={Buyer} />
+        <Tab.Screen name="Manufacturer" component={Manufacturer} />
+        <Tab.Screen name="Wholesaler/Retailer" component={Wholesaler} />
       </Tab.Navigator>
     </SafeAreaView>
   );
