@@ -8,6 +8,8 @@ import Wether from '../scenes/Wether';
 import CashCounter from '../scenes/CashCounter';
 import CashPreview from '../scenes/CashCounter/CashPreview';
 import GSTCalculator from '../scenes/GSTCalculator';
+import EditRecordScreen from '../scenes/Interest/Edit';
+import ViewAllStudentScreen from '../scenes/Interest/ViewAll';
 
 const AppStackNavigator = createStackNavigator();
 
@@ -75,6 +77,22 @@ export default function AppStack() {
         })}
         name="Search"
         component={Search}
+        initialParams={{movieId: '0', contentType: 'movie', name: ''}}
+      />
+      <AppStackNavigator.Screen
+        options={() => ({
+          headerShown: false,
+        })}
+        name="EditRecordScreen"
+        component={EditRecordScreen}
+        initialParams={{movieId: '0', contentType: 'movie', name: ''}}
+      />
+      <AppStackNavigator.Screen
+        options={() => ({
+          headerShown: false,
+        })}
+        name="ViewAllStudentScreen"
+        component={ViewAllStudentScreen}
         initialParams={{movieId: '0', contentType: 'movie', name: ''}}
       />
     </AppStackNavigator.Navigator>

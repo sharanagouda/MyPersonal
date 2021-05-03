@@ -162,7 +162,7 @@ const CashCounter = () => {
     //  Alert.alert(TwoThousands);
     const notes = totalCount;
 
-    return notes;
+    return notes > 0 ? notes : '';
   };
 
   const convertNumbersToWords = () => {
@@ -224,7 +224,7 @@ const CashCounter = () => {
         })}>
         <View style={styles.containerone}>
           <View style={styles.payeeView}>
-            <CustomText text="Payee Name: " />
+            <CustomText text="Payee Name: " style={styles.payeeText} />
             <TextInput
               style={[styles.payeeInput, isHighlighted && styles.isHighlighted]}
               underlineColorAndroid="transparent"
@@ -251,7 +251,7 @@ const CashCounter = () => {
                 },
                 styles.wrapperCustom,
               ]}>
-              <Text style={{fontWeight: '600'}}>X</Text>
+              <Text style={styles.sharePreviewButtons}>X</Text>
             </Pressable>
           </View>
           <View style={styles.headingView}>
@@ -637,7 +637,7 @@ const CashCounter = () => {
                 },
                 styles.wrapperCustom,
               ]}>
-              <Text style={{fontWeight: '600'}}>Save</Text>
+              <Text style={styles.sharePreviewButtons}>Save</Text>
             </Pressable>
             <Pressable
               onPress={() => {
@@ -649,7 +649,7 @@ const CashCounter = () => {
                 },
                 styles.wrapperCustom,
               ]}>
-              <Text style={{fontWeight: '600'}}>Share</Text>
+              <Text style={styles.sharePreviewButtons}>Share</Text>
             </Pressable>
             <Pressable
               onPress={() => {
@@ -664,7 +664,7 @@ const CashCounter = () => {
                 },
                 styles.wrapperCustom,
               ]}>
-              <Text style={{fontWeight: '600'}}>Preview</Text>
+              <Text style={styles.sharePreviewButtons}>Preview</Text>
             </Pressable>
             <Pressable
               onPress={() => clearAllDatas()}
@@ -674,7 +674,7 @@ const CashCounter = () => {
                 },
                 styles.wrapperCustom,
               ]}>
-              <Text style={{fontWeight: '600'}}>Clear All</Text>
+              <Text style={styles.sharePreviewButtons}>Clear All</Text>
             </Pressable>
           </View>
         </View>
@@ -693,17 +693,21 @@ const styles = StyleSheet.create({
   wrapperCustom: {
     borderRadius: 5,
     padding: 6,
+    marginLeft: 5,
   },
   payeeView: {
-    backgroundColor: 'red',
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
   },
+  payeeText: {
+    color: 'black',
+    fontSize: 18,
+  },
   payeeInput: {
     height: 40,
     width: '65%',
-    borderColor: '#7a42f4',
+    borderColor: '#000',
     borderWidth: 1,
     borderRadius: 5,
   },
@@ -745,6 +749,9 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  sharePreviewButtons: {
+    fontWeight: '600',
   },
   input: {
     margin: 15,
