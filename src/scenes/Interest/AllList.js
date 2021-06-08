@@ -9,7 +9,7 @@ import {
   TextInput,
   FlatList,
 } from 'react-native';
-
+import Toolbar from '../../components/ToolBar';
 import {openDatabase} from 'react-native-sqlite-storage';
 import {useNavigation} from '@react-navigation/native';
 
@@ -67,6 +67,7 @@ function HomeScreen() {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
       <View style={styles.mainContainer}>
         <Text style={{fontSize: 24, textAlign: 'center', color: '#000'}}>
           Insert Data Into SQLite Database

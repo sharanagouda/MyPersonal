@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import {openDatabase} from 'react-native-sqlite-storage';
-
+import Toolbar from '../../components/ToolBar';
 var db = openDatabase({name: 'SchoolDatabase.db'});
 
 const EditRecordScreen = ({route, navigation}) => {
@@ -71,6 +71,7 @@ const EditRecordScreen = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
       <View style={styles.mainContainer}>
         <Text style={{fontSize: 24, textAlign: 'center', color: '#000'}}>
           Edit Record In SQLite Database

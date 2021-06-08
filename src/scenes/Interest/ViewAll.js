@@ -12,7 +12,7 @@ import {
 
 import {openDatabase} from 'react-native-sqlite-storage';
 import {useIsFocused} from '@react-navigation/native';
-
+import Toolbar from '../../components/ToolBar';
 var db = openDatabase({name: 'SchoolDatabase.db'});
 
 const ViewAllStudentScreen = ({navigation}) => {
@@ -72,6 +72,7 @@ const ViewAllStudentScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <Toolbar onPressNavigateBack={() => navigation.goBack(null)} />
       <View style={{flex: 1}}>
         {empty ? (
           emptyMSG(empty)
