@@ -289,7 +289,7 @@ const CashPreview = ({route}) => {
           ) : null}
           <View>
             <CustomText
-              text={'==================================='}
+              text={'============================='}
               style={styles.boldTexts}
             />
           </View>
@@ -301,7 +301,7 @@ const CashPreview = ({route}) => {
           </CustomText>
           <View>
             <CustomText
-              text={'==================================='}
+              text={'============================='}
               style={styles.boldTexts}
             />
           </View>
@@ -341,6 +341,7 @@ const styles = StyleSheet.create({
   },
   mainView: {
     paddingHorizontal: 15,
+    marginTop: 50,
   },
   textStyle: {
     fontSize: 16,

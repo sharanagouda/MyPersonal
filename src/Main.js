@@ -150,17 +150,15 @@ export default class Main extends Component {
     const {userOnboarded, showForceUpgradeAlert} = this.state;
     console.log('storeretun', this.state);
     return (
-      <View style={styles.container}>
-        <SafeAreaProvider>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <NavigationContainer fallback={<Text>Loading...</Text>}>
-                {!userOnboarded ? <OnBoardingStack /> : <AppStack />}
-              </NavigationContainer>
-            </PersistGate>
-          </Provider>
-        </SafeAreaProvider>
-      </View>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer fallback={<Text>Loading...</Text>}>
+              {!userOnboarded ? <OnBoardingStack /> : <AppStack />}
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
     );
   }
 }

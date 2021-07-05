@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Icon} from 'react-native-elements';
 import Home from '../scenes/Home';
 import Profile from '../scenes/Profile';
+import AllInterestList from '../scenes/Interest';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -42,7 +43,7 @@ function MyTabs() {
       /> */}
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={AllInterestList}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({color}) => (

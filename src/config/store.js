@@ -10,7 +10,7 @@ import cashCounterReducer from '../reducers/cash-counter-reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['bookmarks'],
+  whitelist: ['bookmarks', 'cashCounter'],
 };
 
 const rootReducer = combineReducers({
