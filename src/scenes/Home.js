@@ -34,10 +34,10 @@ const menuData = [
   },
   {
     id: 4,
-    title: 'Family',
+    title: 'GST Calculator',
     color: '#6A5ACD',
     image: 'https://img.icons8.com/color/70/000000/family.png',
-    page: 'calculator',
+    page: 'GSTCalculator',
   },
   {
     id: 5,
